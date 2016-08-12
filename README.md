@@ -7,8 +7,6 @@
 [![Quality Score][ico-code-quality]][link-code-quality]
 [![Total Downloads][ico-downloads]][link-downloads]
 
-**Note:** Replace ```David Ducatel``` ```:author_username``` ```ducatel.eu``` ```david@ducatel.eu``` ```Ducatel``` ```PHPCollection``` ```:package_description``` with their correct values in [README.md](README.md), [CHANGELOG.md](CHANGELOG.md), [CONTRIBUTING.md](CONTRIBUTING.md), [LICENSE.md](LICENSE.md) and [composer.json](composer.json) files, then delete this line.
-
 This is where your description should go. Try and limit it to a paragraph or two, and maybe throw in a mention of what
 PSRs you support to avoid any confusion with users and contributors.
 
@@ -17,14 +15,14 @@ PSRs you support to avoid any confusion with users and contributors.
 Via Composer
 
 ``` bash
-$ composer require Ducatel/PHPCollection
+$ composer require ducatel/PHPCollection
 ```
 
 ## Usage
 
 ``` php
-$skeleton = new League\Skeleton();
-echo $skeleton->echoPhrase('Hello, League!');
+$arrayOfPDO = new Ducatel\PHPCollection\TypedArray(PDO::class);
+$arrayOfPDO[] = new PDO();
 ```
 
 ## Change log
