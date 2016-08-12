@@ -5,7 +5,7 @@ namespace Ducatel\PHPCollection\Base;
 abstract class AbstractTypedCollection extends AbstractCollection
 {
     /**
-     * @var \Callable The function used to check if an object is belongs to the type of this collection
+     * @var \Closure The function used to check if an object is belongs to the type of this collection
      * This function must take one argument and return true when args is in valid type (false otherwise)
      */
     protected $validateTypeFct;
