@@ -4,6 +4,9 @@ php:
   - hhvm
   - nightly
 
+install:
+    - travis_retry composer self-update
+    - travis_retry composer update --no-interaction --prefer-dist
+
 script:
-  - vendor/bin/phpcs --standard=psr2 src/
-  - vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover
+    - composer test
