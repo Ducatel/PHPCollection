@@ -157,6 +157,5 @@ class TypedArray extends Base\AbstractTypedCollection implements \ArrayAccess
     public function offsetUnset($offset)
     {
         unset($this->data[$offset]);
-
     }
 }

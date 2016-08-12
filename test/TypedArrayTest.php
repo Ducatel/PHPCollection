@@ -9,9 +9,11 @@ class TypedArrayTest extends \PHPUnit_Framework_TestCase
     /**
      * @expectedException \TypeError
      */
-    public function testWithBool() {
-
-        $typedArray = new TypedArray( function($obj){ return is_bool($obj);});
+    public function testWithBool()
+    {
+        $typedArray = new TypedArray(function ($obj) {
+            return is_bool($obj);
+        });
         $this->assertEquals(0, $typedArray->count());
 
         $this->assertFalse($typedArray->add("test"));
@@ -32,7 +34,7 @@ class TypedArrayTest extends \PHPUnit_Framework_TestCase
 
         $total = $typedArray->count();
         $typedArray->delete(0);
-        $this->assertEquals($total -1 , $typedArray->count());
+        $this->assertEquals($total -1, $typedArray->count());
 
         $typedArray->contains(42);
     }
@@ -40,8 +42,11 @@ class TypedArrayTest extends \PHPUnit_Framework_TestCase
     /**
      * @expectedException \TypeError
      */
-    public function testWithString() {
-        $typedArray = new TypedArray( function($obj){ return is_string($obj);});
+    public function testWithString()
+    {
+        $typedArray = new TypedArray(function ($obj) {
+            return is_string($obj);
+        });
 
 
         $this->assertFalse($typedArray->add(true));
@@ -63,8 +68,8 @@ class TypedArrayTest extends \PHPUnit_Framework_TestCase
     /**
      * @expectedException \TypeError
      */
-    public function testWithObject() {
-
+    public function testWithObject()
+    {
         $mockBuilder = $this->getMockBuilder('\PDO')->disableOriginalConstructor();
         $typedArray = new TypedArray('\PDO');
         $this->assertNotFalse($typedArray->add($mockBuilder->getMock()));
@@ -76,8 +81,8 @@ class TypedArrayTest extends \PHPUnit_Framework_TestCase
         $typedArray->delete('plpo');
     }
 
-    public function testWithObjectImplementEquatable() {
-
+    public function testWithObjectImplementEquatable()
+    {
         $mock = $this->getMockBuilder('Ducatel\PHPCollection\Base\Equatable')->getMock();
         $mock->method('equals')
             ->willReturn(true);
@@ -89,10 +94,14 @@ class TypedArrayTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($typedArray->add(42));
     }
 
-    public function testWithCustomEqualsFunction() {
-
-        $isStringFct = function($obj){ return is_string($obj);};
-        $isEquals = function ($obj1, $obj2){ return (strcasecmp($obj1, $obj2) == 0);};
+    public function testWithCustomEqualsFunction()
+    {
+        $isStringFct = function ($obj) {
+            return is_string($obj);
+        };
+        $isEquals = function ($obj1, $obj2) {
+            return (strcasecmp($obj1, $obj2) == 0);
+        };
         $typedArray = new TypedArray($isStringFct, $isEquals);
 
         $this->assertFalse($typedArray->add(true));
@@ -104,6 +113,4 @@ class TypedArrayTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($typedArray->contains('plop'));
         $this->assertTrue($typedArray->contains('PloP'));
     }
-
-
 }
