@@ -1,6 +1,6 @@
 <?php
 
-namespace Ducatel\PHPCollection\Test;
+namespace Ducatel\PHPCollection\test;
 
 use Ducatel\PHPCollection\TypedArray;
 
@@ -114,9 +114,9 @@ class TypedArrayTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($typedArray->contains('PloP'));
     }
 
-	/**
-	 * @expectedException \TypeError
-	 */
+    /**
+     * @expectedException \TypeError
+     */
     public function testArrayAccessFunctions()
     {
         $isStringFct = function ($obj) {
@@ -128,33 +128,32 @@ class TypedArrayTest extends \PHPUnit_Framework_TestCase
 
         $stringArray = new TypedArray($isStringFct, $isEquals);
 
-		$stringArray[] = "plip";
-		$this->assertTrue(isset($stringArray[0]));
-		$this->assertEquals("plip", $stringArray[0] );
+        $stringArray[] = "plip";
+        $this->assertTrue(isset($stringArray[0]));
+        $this->assertEquals("plip", $stringArray[0]);
 
-		$stringArray[] = "plap";
-		$this->assertEquals("plap", $stringArray[1] );
+        $stringArray[] = "plap";
+        $this->assertEquals("plap", $stringArray[1]);
 
-		$this->assertFalse($stringArray->contains('123'));
-		$this->assertTrue($stringArray->contains('plip'));
-		$this->assertTrue($stringArray->contains('plap'));
+        $this->assertFalse($stringArray->contains('123'));
+        $this->assertTrue($stringArray->contains('plip'));
+        $this->assertTrue($stringArray->contains('plap'));
 
-		$stringArray[0] = "plop";
+        $stringArray[0] = "plop";
 
-		$this->assertFalse($stringArray->contains('123'));
-		$this->assertFalse($stringArray->contains('plip'));
-		$this->assertTrue($stringArray->contains('plap'));
-		$this->assertTrue($stringArray->contains('plop'));
-
-
-		unset($stringArray[1]);
-
-		$this->assertFalse($stringArray->contains('plip'));
-		$this->assertFalse($stringArray->contains('plap'));
-		$this->assertTrue($stringArray->contains('plop'));
+        $this->assertFalse($stringArray->contains('123'));
+        $this->assertFalse($stringArray->contains('plip'));
+        $this->assertTrue($stringArray->contains('plap'));
+        $this->assertTrue($stringArray->contains('plop'));
 
 
-		$stringArray[] = true;
+        unset($stringArray[1]);
 
-	}
+        $this->assertFalse($stringArray->contains('plip'));
+        $this->assertFalse($stringArray->contains('plap'));
+        $this->assertTrue($stringArray->contains('plop'));
+
+
+        $stringArray[] = true;
+    }
 }

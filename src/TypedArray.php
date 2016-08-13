@@ -12,12 +12,13 @@ namespace Ducatel\PHPCollection;
  *     - Ordering: same as input unless when explicitly sorted
  *
  * @package Ducatel\PHPCollection
- * @author D.Ducatel
+ * @author  D.Ducatel
  */
 class TypedArray extends Base\AbstractTypedCollection implements \ArrayAccess
 {
     /**
      * Add an object to this collection
+     *
      * @param object $object The object you want to add
      *
      * @return True when added with success, else false
@@ -56,11 +57,12 @@ class TypedArray extends Base\AbstractTypedCollection implements \ArrayAccess
 
     /**
      * Count elements of an object
-     * @link http://php.net/manual/en/countable.count.php
+     *
+     * @link  http://php.net/manual/en/countable.count.php
      * @return int The custom count as an integer.
-     * </p>
-     * <p>
-     * The return value is cast to an integer.
+     *        </p>
+     *        <p>
+     *        The return value is cast to an integer.
      * @since 5.1.0
      */
     public function count()
@@ -71,9 +73,10 @@ class TypedArray extends Base\AbstractTypedCollection implements \ArrayAccess
 
     /**
      * Retrieve an external iterator
-     * @link http://php.net/manual/en/iteratoraggregate.getiterator.php
+     *
+     * @link  http://php.net/manual/en/iteratoraggregate.getiterator.php
      * @return \Traversable An instance of an object implementing <b>Iterator</b> or
-     * <b>Traversable</b>
+     *        <b>Traversable</b>
      * @since 5.0.0
      */
     public function getIterator()
@@ -83,11 +86,12 @@ class TypedArray extends Base\AbstractTypedCollection implements \ArrayAccess
 
     /**
      * Whether a offset exists
-     * @link http://php.net/manual/en/arrayaccess.offsetexists.php
+     *
+     * @link  http://php.net/manual/en/arrayaccess.offsetexists.php
      *
      * @param mixed $offset <p>
-     * An offset to check for.
-     * </p>
+     *                      An offset to check for.
+     *                      </p>
      *
      * @return boolean true on success or false on failure.
      * </p>
@@ -102,11 +106,12 @@ class TypedArray extends Base\AbstractTypedCollection implements \ArrayAccess
 
     /**
      * Offset to retrieve
-     * @link http://php.net/manual/en/arrayaccess.offsetget.php
+     *
+     * @link  http://php.net/manual/en/arrayaccess.offsetget.php
      *
      * @param mixed $offset <p>
-     * The offset to retrieve.
-     * </p>
+     *                      The offset to retrieve.
+     *                      </p>
      *
      * @return mixed Can return all value types.
      * @since 5.0.0
@@ -116,17 +121,17 @@ class TypedArray extends Base\AbstractTypedCollection implements \ArrayAccess
         return $this->data[$offset];
     }
 
-	/**
-	 * Offset to set
-	 *
-	 * @link  http://php.net/manual/en/arrayaccess.offsetset.php
-	 *
-	 * @param mixed $offset The offset to assign the value to.
-	 * @param mixed $value  The value to set.
-	 *
-	 * @throws \TypeError When try to add type not managed by this collection
-	 * @since 5.0.0
-	 */
+    /**
+     * Offset to set
+     *
+     * @link  http://php.net/manual/en/arrayaccess.offsetset.php
+     *
+     * @param mixed $offset The offset to assign the value to.
+     * @param mixed $value  The value to set.
+     *
+     * @throws \TypeError When try to add type not managed by this collection
+     * @since 5.0.0
+     */
     public function offsetSet($offset, $value)
     {
         if (call_user_func($this->validateTypeFct, $value) === false) {
@@ -142,11 +147,12 @@ class TypedArray extends Base\AbstractTypedCollection implements \ArrayAccess
 
     /**
      * Offset to unset
-     * @link http://php.net/manual/en/arrayaccess.offsetunset.php
+     *
+     * @link  http://php.net/manual/en/arrayaccess.offsetunset.php
      *
      * @param mixed $offset <p>
-     * The offset to unset.
-     * </p>
+     *                      The offset to unset.
+     *                      </p>
      *
      * @return void
      * @since 5.0.0
