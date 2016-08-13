@@ -113,4 +113,48 @@ class TypedArrayTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($typedArray->contains('plop'));
         $this->assertTrue($typedArray->contains('PloP'));
     }
+
+	/**
+	 * @expectedException \TypeError
+	 */
+    public function testArrayAccessFunctions()
+    {
+        $isStringFct = function ($obj) {
+            return is_string($obj);
+        };
+        $isEquals = function ($obj1, $obj2) {
+            return (strcasecmp($obj1, $obj2) == 0);
+        };
+
+        $stringArray = new TypedArray($isStringFct, $isEquals);
+
+		$stringArray[] = "plip";
+		$this->assertTrue(isset($stringArray[0]));
+		$this->assertEquals("plip", $stringArray[0] );
+
+		$stringArray[] = "plap";
+		$this->assertEquals("plap", $stringArray[1] );
+
+		$this->assertFalse($stringArray->contains('123'));
+		$this->assertTrue($stringArray->contains('plip'));
+		$this->assertTrue($stringArray->contains('plap'));
+
+		$stringArray[0] = "plop";
+
+		$this->assertFalse($stringArray->contains('123'));
+		$this->assertFalse($stringArray->contains('plip'));
+		$this->assertTrue($stringArray->contains('plap'));
+		$this->assertTrue($stringArray->contains('plop'));
+
+
+		unset($stringArray[1]);
+
+		$this->assertFalse($stringArray->contains('plip'));
+		$this->assertFalse($stringArray->contains('plap'));
+		$this->assertTrue($stringArray->contains('plop'));
+
+
+		$stringArray[] = true;
+
+	}
 }

@@ -3,7 +3,7 @@
 namespace Ducatel\PHPCollection;
 
 /**
- * Class TypedArray
+ * Class Specialized
  * This class represent a array which can contains only one type of object.
  * Characteristics:
  *
@@ -116,24 +116,21 @@ class TypedArray extends Base\AbstractTypedCollection implements \ArrayAccess
         return $this->data[$offset];
     }
 
-    /**
-     * Offset to set
-     * @link http://php.net/manual/en/arrayaccess.offsetset.php
-     *
-     * @param mixed $offset <p>
-     * The offset to assign the value to.
-     * </p>
-     * @param mixed $value <p>
-     * The value to set.
-     * </p>
-     *
-     * @return void
-     * @since 5.0.0
-     */
+	/**
+	 * Offset to set
+	 *
+	 * @link  http://php.net/manual/en/arrayaccess.offsetset.php
+	 *
+	 * @param mixed $offset The offset to assign the value to.
+	 * @param mixed $value  The value to set.
+	 *
+	 * @throws \TypeError When try to add type not managed by this collection
+	 * @since 5.0.0
+	 */
     public function offsetSet($offset, $value)
     {
         if (call_user_func($this->validateTypeFct, $value) === false) {
-            return null;
+            throw new \TypeError("Object cannot be added. Type not managed by this collection");
         }
 
         if (is_null($offset)) {
