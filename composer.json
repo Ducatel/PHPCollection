@@ -1,10 +1,10 @@
 {
-    "name": "ducatel/PHPCollection",
+    "name": "ducatel/php-collection",
     "type": "library",
     "description": "Implementation of data structure in PHP",
     "keywords": [
         "ducatel",
-        "PHPCollection"
+        "collection"
     ],
     "homepage": "https://github.com/Ducatel/PHPCollection",
     "license": "MIT",
