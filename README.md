@@ -8,7 +8,14 @@
 [![Total Downloads][ico-downloads]][link-downloads]
 [![StyleCI][ico-style-ci]][link-style-ci]
 
-This library adds some "standard" collections for PHP.
+This library adds some "standard" collections for PHP. 
+Collections are like array which follow constrains : 
+
+* **Typed** collections accept only one type of variable
+* **Sorted** collections are always sorted
+* **Set** collections not allows duplicates
+
+You can found also some already specialized collection for non object variable (like string or number)
 
 ## Install
 
@@ -22,13 +29,14 @@ $ composer require ducatel/php-collection
 
 ``` php
 
-$typedArray = new Ducatel\PHPCollection\TypedArray(SomeClass::class);
-$typedArray[] = new SomeClass();
-$typedArray[] = new SomeClass("x");
-$typedArray[] = new SomeClass("y");
-$typedArray[] = new PDO(); // FAIL
+$stringArray = new Ducatel\PHPCollection\Specialized\StringArray();
+$stringArray[] = "a"; // ['a']
+$stringArray[] = "b"; // ['a', 'b']
+$stringArray[] = new PDO(); // FAIL
 
-
+$typedArray = new Ducatel\PHPCollection\TypedArray(MyClass::class);
+$typedArray[] = new MyClass(); // OK
+$typedArray[] = "a"; // FAIL
 
 ```
 

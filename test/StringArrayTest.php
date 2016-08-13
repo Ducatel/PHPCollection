@@ -2,7 +2,7 @@
 
 namespace Ducatel\PHPCollection\test;
 
-use Ducatel\PHPCollection\Specialized\StringTypedArray;
+use Ducatel\PHPCollection\Specialized\StringArray;
 
 class StringTypedArrayTest extends \PHPUnit_Framework_TestCase
 {
@@ -11,7 +11,7 @@ class StringTypedArrayTest extends \PHPUnit_Framework_TestCase
      */
     public function testCaseSensitive()
     {
-        $typedArray = new StringTypedArray();
+        $typedArray = new StringArray();
 
         $this->assertFalse($typedArray->add(true));
         $this->assertFalse($typedArray->add(new \stdClass()));
@@ -34,7 +34,7 @@ class StringTypedArrayTest extends \PHPUnit_Framework_TestCase
      */
     public function testCaseInSensitive()
     {
-        $typedArray = new StringTypedArray(false);
+        $typedArray = new StringArray(false);
 
         $this->assertFalse($typedArray->add(true));
         $this->assertFalse($typedArray->add(new \stdClass()));

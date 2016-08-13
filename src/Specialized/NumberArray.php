@@ -5,12 +5,12 @@ namespace Ducatel\PHPCollection\Specialized;
 use Ducatel\PHPCollection\TypedArray;
 
 /**
- * Class NumberTypedArray
+ * Class NumberArray
  * This collection is a specialization of TypedArray for numeric variables.
  *
 *@package Ducatel\PHPCollection\Specialized
  */
-class NumberTypedArray extends TypedArray
+class NumberArray extends TypedArray
 {
 
     /**

@@ -5,14 +5,14 @@ namespace Ducatel\PHPCollection\Specialized;
 use Ducatel\PHPCollection\TypedArray;
 
 /**
- * Class StringTypedArray
+ * Class StringArray
  * This collection is a specialization of TypedArray for string variables.
  * @package Ducatel\PHPCollection\Specialized
  */
-class StringTypedArray extends TypedArray
+class StringArray extends TypedArray
 {
     /**
-     * StringTypedArray constructor.
+     * StringArray constructor.
      *
      * @param bool $caseSensitive True if the collection should be case sensitive
      */

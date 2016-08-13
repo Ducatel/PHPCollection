@@ -2,14 +2,14 @@
 
 namespace Ducatel\PHPCollection\test;
 
-use Ducatel\PHPCollection\Specialized\NumberTypedArray;
+use Ducatel\PHPCollection\Specialized\NumberArray;
 
 class NumberTypedArrayTest extends \PHPUnit_Framework_TestCase
 {
 
     public function testStdUsage()
     {
-        $typedArray = new NumberTypedArray();
+        $typedArray = new NumberArray();
 
         $this->assertTrue($typedArray->add(42));
         $this->assertTrue($typedArray->add(123.12));
