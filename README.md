@@ -11,9 +11,11 @@
 This library adds some "standard" collections for PHP. 
 Collections are like array which follow constrains : 
 
-* **Typed** collections accept only one type of variable
-* **Sorted** collections are always sorted
-* **Set** collections not allows duplicates
+* **Typed** collections which accept only one type of variable
+* **Sorted** collections which are always sorted
+* **Set** collections which not allows duplicates
+* **Array** collections which allows duplicates
+
 
 You can found also some already specialized collection for non object variable (like string or number)
 
