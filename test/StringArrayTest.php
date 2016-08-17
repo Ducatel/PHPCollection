@@ -4,7 +4,7 @@ namespace Ducatel\PHPCollection\test;
 
 use Ducatel\PHPCollection\Specialized\StringArray;
 
-class StringTypedArrayTest extends \PHPUnit_Framework_TestCase
+class StringArrayTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @expectedException \TypeError

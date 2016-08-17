@@ -3,12 +3,10 @@
 namespace Ducatel\PHPCollection;
 
 /**
- * Class Specialized
  * This class represent a array which can contains only one type of object.
  * Characteristics:
  *
- *     - Keys: consequentially numbered, without gaps
- *     - Values: anything, duplicates allowed
+ *     - Values: Typed value, duplicates allowed
  *     - Ordering: same as input unless when explicitly sorted
  *
  * @package Ducatel\PHPCollection
@@ -21,15 +19,22 @@ class TypedArray extends Base\AbstractTypedCollection implements \ArrayAccess
      *
      * @param object $object The object you want to add
      *
+     * @param null|object $key The key where object will be stored. Null if you won't to use this as associative array
+     *
      * @return True when added with success, else false
      */
-    public function add($object)
+    public function add($object, $key = null)
     {
         if (call_user_func($this->validateTypeFct, $object) === false) {
             return false;
         }
 
-        $this->data[] = $object;
+        if (is_null($key)) {
+            $this->data[] = $object;
+        } else {
+            $this->data[$key] = $object;
+        }
+
         return true;
     }
 
@@ -55,34 +60,7 @@ class TypedArray extends Base\AbstractTypedCollection implements \ArrayAccess
         return $result[0];
     }
 
-    /**
-     * Count elements of an object
-     *
-     * @link  http://php.net/manual/en/countable.count.php
-     * @return int The custom count as an integer.
-     *        </p>
-     *        <p>
-     *        The return value is cast to an integer.
-     * @since 5.1.0
-     */
-    public function count()
-    {
-        return count($this->data);
-    }
 
-
-    /**
-     * Retrieve an external iterator
-     *
-     * @link  http://php.net/manual/en/iteratoraggregate.getiterator.php
-     * @return \Traversable An instance of an object implementing <b>Iterator</b> or
-     *        <b>Traversable</b>
-     * @since 5.0.0
-     */
-    public function getIterator()
-    {
-        return new \ArrayIterator($this->data);
-    }
 
     /**
      * Whether a offset exists

@@ -4,7 +4,7 @@ namespace Ducatel\PHPCollection\test;
 
 use Ducatel\PHPCollection\Specialized\NumberArray;
 
-class NumberTypedArrayTest extends \PHPUnit_Framework_TestCase
+class NumberArrayTest extends \PHPUnit_Framework_TestCase
 {
 
     public function testStdUsage()

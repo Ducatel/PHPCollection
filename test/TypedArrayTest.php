@@ -156,4 +156,26 @@ class TypedArrayTest extends \PHPUnit_Framework_TestCase
 
         $stringArray[] = true;
     }
+
+    public function testUsageAssociativeArray()
+    {
+        $isStringFct = function ($obj) {
+            return is_string($obj);
+        };
+        $isEquals = function ($obj1, $obj2) {
+            return (strcasecmp($obj1, $obj2) == 0);
+        };
+
+        $stringArray = new TypedArray($isStringFct, $isEquals);
+
+        $stringArray["plop"] = "plip";
+        $this->assertTrue(isset($stringArray["plop"]));
+        $this->assertTrue($stringArray->contains("plip"));
+
+        $stringArray->add("plap", "ploup");
+        $this->assertTrue($stringArray->contains("plap"));
+
+        $stringArray->add("updated", "ploup");
+        $this->assertEquals("updated", $stringArray["ploup"]);
+    }
 }
