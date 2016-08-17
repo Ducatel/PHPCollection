@@ -6,7 +6,6 @@ use Ducatel\PHPCollection\Specialized\NumberArray;
 
 class NumberArrayTest extends \PHPUnit_Framework_TestCase
 {
-
     public function testStdUsage()
     {
         $typedArray = new NumberArray();
