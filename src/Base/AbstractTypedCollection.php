@@ -8,13 +8,13 @@ abstract class AbstractTypedCollection extends AbstractCollection
      * @var \Closure The function used to check if an object is belongs to the type of this collection
      * This function must take one argument and return true when args is in valid type (false otherwise)
      */
-    protected $validateTypeFct;
+    private $validateTypeFct;
 
     /**
      * @var \Closure The function used to check if two object are equals
      * This function must take two arguments and return true when arguments are equals (false otherwise)
      */
-    protected $equalsFct;
+    private $equalsFct;
 
     /**
      * AbstractTypedCollection constructor.
@@ -50,6 +50,26 @@ abstract class AbstractTypedCollection extends AbstractCollection
         }
     }
 
+    /**
+     * Check if an object can be manage by the current collection
+     * @param $object The object you want to test
+     * @return bool True if can be added false otherwise
+     */
+    public function validateType($object) : bool
+    {
+        return (call_user_func($this->validateTypeFct, $object) === true);
+    }
+
+    /**
+     * Check if two object are equals
+     * @param $object1 First object you want to compare to
+     * @param $object2 Second object you want to compare
+     * @return bool True if objects are equals false otherwise
+     */
+    private function checkEquality($object1, $object2) : bool
+    {
+        return (call_user_func($this->equalsFct, $object1, $object2) === true);
+    }
 
     /**
      * Check if an object is present in the collection.
@@ -62,12 +82,12 @@ abstract class AbstractTypedCollection extends AbstractCollection
      */
     public function contains($objectToFind) : bool
     {
-        if (call_user_func($this->validateTypeFct, $objectToFind) === false) {
+        if ($this->validateType($objectToFind) === false) {
             throw new \TypeError("Object in parameter is not an instance of a good class");
         }
 
         foreach ($this as $elem) {
-            if (call_user_func($this->equalsFct, $elem, $objectToFind)) {
+            if ($this->checkEquality($elem, $objectToFind)) {
                 return true;
             }
         }

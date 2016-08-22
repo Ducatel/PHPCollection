@@ -25,7 +25,7 @@ class TypedArray extends Base\AbstractTypedCollection implements \ArrayAccess
      */
     public function add($object, $key = null)
     {
-        if (call_user_func($this->validateTypeFct, $object) === false) {
+        if ($this->validateType($object) === false) {
             return false;
         }
 
@@ -112,7 +112,7 @@ class TypedArray extends Base\AbstractTypedCollection implements \ArrayAccess
      */
     public function offsetSet($offset, $value)
     {
-        if (call_user_func($this->validateTypeFct, $value) === false) {
+        if ($this->validateType($value) === false) {
             throw new \TypeError("Object cannot be added. Type not managed by this collection");
         }
 
