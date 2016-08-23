@@ -2,6 +2,7 @@
 
 namespace Ducatel\PHPCollection\Specialized;
 
+use Ducatel\PHPCollection\Base\Traits\NumberSpecialization;
 use Ducatel\PHPCollection\TypedArray;
 
 /**
@@ -12,16 +13,5 @@ use Ducatel\PHPCollection\TypedArray;
  */
 class NumberArray extends TypedArray
 {
-
-    /**
-     * NumberTypedArray constructor.
-     */
-    public function __construct()
-    {
-        $isNumber = function ($obj) {
-            return is_numeric($obj);
-        };
-
-        parent::__construct($isNumber);
-    }
+    use NumberSpecialization;
 }
