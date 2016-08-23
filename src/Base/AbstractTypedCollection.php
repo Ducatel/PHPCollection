@@ -24,29 +24,48 @@ abstract class AbstractTypedCollection extends AbstractCollection
      *  2. A function which take one arguments and return true when it in the good type (false otherwise)
      * @param null|\Closure $equalsFct When you pass null, the object will use the function \Equatable::equals if exist, else use the ===
      *                                 When you pass a Closure, the function must take two arguments and return true when 2 arguments are equals
+     * @throws \TypeError When parameter are not in a valid type
      */
     public function __construct($type, $equalsFct = null)
     {
-        if (is_callable($type)) {
-            $this->validateTypeFct = $type;
-        } else {
+        if ($this->is_closure($type) === false && is_string($type) === false) {
+            throw new \TypeError('Parameter $type can be an object (string or instance) or a function');
+        }
+
+        if ($equalsFct !== null && $this->is_closure($equalsFct) === false) {
+            throw new \TypeError('Parameter $equalsFct can be null or a function');
+        }
+
+        if (is_string($type)) { // Collection of object
+
             $this->validateTypeFct = function ($object) use ($type) {
                 return ($object instanceof $type);
             };
-        }
 
-        if ($equalsFct === null) {
-            if (is_callable($type)) {
+            if ($equalsFct === null) {
+                $arrayOfInterface = class_implements($type);
+                if (in_array("Ducatel\\PHPCollection\\Base\\Equatable", $arrayOfInterface)) {
+                    $this->equalsFct = function ($obj1, $obj2) {
+                        return $obj1->equals($obj2);
+                    };
+                } else {
+                    $this->equalsFct = function ($obj1, $obj2) {
+                        return $obj1 === $obj2;
+                    };
+                }
+            } else {
+                $this->equalsFct = $equalsFct;
+            }
+        } else {
+            $this->validateTypeFct = $type;
+
+            if ($equalsFct === null) {
                 $this->equalsFct = function ($obj1, $obj2) {
                     return $obj1 === $obj2;
                 };
             } else {
-                $this->equalsFct = function ($obj1, $obj2) {
-                    return $obj1->equals($obj2);
-                };
+                $this->equalsFct = $equalsFct;
             }
-        } else {
-            $this->equalsFct = $equalsFct;
         }
     }
 
@@ -69,6 +88,16 @@ abstract class AbstractTypedCollection extends AbstractCollection
     private function checkEquality($object1, $object2) : bool
     {
         return (call_user_func($this->equalsFct, $object1, $object2) === true);
+    }
+
+    /**
+     * Check if the object in param is a Closure
+     * @param $object The object you want to test
+     * @return bool True if it's a valid closure, else false
+     */
+    protected function is_closure($object) : bool
+    {
+        return is_object($object) && ($object instanceof \Closure);
     }
 
     /**

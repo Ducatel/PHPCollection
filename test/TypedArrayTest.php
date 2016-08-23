@@ -83,11 +83,13 @@ class TypedArrayTest extends \PHPUnit_Framework_TestCase
 
     public function testWithObjectImplementEquatable()
     {
-        $mock = $this->getMockBuilder('Ducatel\PHPCollection\Base\Equatable')->getMock();
+        $mock = $this->getMockBuilder('Ducatel\PHPCollection\Base\Equatable')
+            ->setMockClassName("testClass")
+            ->getMock();
         $mock->method('equals')
             ->willReturn(true);
 
-        $typedArray = new TypedArray('Ducatel\PHPCollection\Base\Equatable');
+        $typedArray = new TypedArray('testClass');
         $this->assertNotFalse($typedArray->add($mock));
         $this->assertFalse($typedArray->add(true));
         $this->assertFalse($typedArray->add(new \stdClass()));
@@ -177,5 +179,21 @@ class TypedArrayTest extends \PHPUnit_Framework_TestCase
 
         $stringArray->add("updated", "ploup");
         $this->assertEquals("updated", $stringArray["ploup"]);
+    }
+
+    /**
+     * @expectedException \TypeError
+     */
+    public function testBadTypeInFirstParamConstructor()
+    {
+        new TypedArray(42, null);
+    }
+
+    /**
+     * @expectedException \TypeError
+     */
+    public function testBadTypeInSecondParamConstructor()
+    {
+        new TypedArray('\PDO', "plop");
     }
 }
